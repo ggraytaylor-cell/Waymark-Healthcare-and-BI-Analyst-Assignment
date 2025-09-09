@@ -21,7 +21,7 @@ dftsk1 = pd.read_csv("C:\\Users\\ggray\\Desktop\\Python files\\patient_id_month_
 # Convert month_year to datetime format
 dftsk1['month_year'] = pd.to_datetime(dftsk1['month_year'], format= '%m/%d/%Y')
 
-# Reshape with groupby to get min and max date values by patient and create new start/end date variables based on min/max month_year values
+# Reshape with groupby to get min and max date values by patient; create new start/end enrollment date variables based on min/max month_year values
 tsk1exprt = dftsk1.groupby('patient_id').agg(enrollment_start_date = ('month_year', 'min'), 
                                                            enrollment_end_date = ('month_year', 'max')).reset_index()
 
@@ -29,7 +29,7 @@ tsk1exprt = dftsk1.groupby('patient_id').agg(enrollment_start_date = ('month_yea
 tsk1exprt.shape 
     # answer 1 = 1000 rows 
 
-# Export to CSV without index for task 1 
+# Save task 1 file 
 tsk1exprt.to_csv("C:\\Users\\ggray\\Desktop\\Python files\\patient_enrollment_span.csv", index=False)
 
 #####################################################################################
@@ -62,7 +62,7 @@ fordedup = filtereddf[['patient_id', 'enrollment_start_date', 'enrollment_end_da
 # Deduplicate to only keep unique combinations of patient id, enrollment start date, enrollment end date
 dedup = fordedup.drop_duplicates()
 
-# Export CSV
+# Save task 2 file
 dedup.to_csv("C:\\Users\\ggray\\Desktop\\Python files\\result.csv", index=False)
 
 # Question 2: Report the number of distinct values of ct_days_with_outpatient_visit in result.csv
@@ -71,3 +71,4 @@ dedup['ct_days_with_outpatient_visit'].nunique()
 
 
 ####### END SCRIPT #######
+
